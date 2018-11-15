@@ -2,12 +2,15 @@
 <section id="app">
     <!--h1><%= user._id%></h1-->
     <%= user.email %>
+    <%= posts%>
     <!--
     <%= user.password %>
     -->
+
+
+    
     <form action="/publicar/<%= user._id%>" method="post">
         <input type="text" name="title">
-        <!--input v-show="value" type="text" name="author" style="display: none" value=<%= user._id%>-->
         <textarea name="description" id="" cols="30" rows="10"></textarea>
         <button type="submit">Enviar</button>
     </form>

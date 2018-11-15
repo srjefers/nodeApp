@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   app.locals.signinMessage = req.flash('signinMessage');
   app.locals.signupMessage = req.flash('signupMessage');
   app.locals.user = req.user;
-  console.log(app.locals)
+  //console.log(app.locals)
   next();
 });
 
@@ -42,5 +42,5 @@ app.use('/', require('./routes/index'));
 
 // Starting the server
 app.listen(app.get('port'), () => {
-  console.log('server on port', app.get('port'));
+  //console.log('server on port', app.get('port'));
 });

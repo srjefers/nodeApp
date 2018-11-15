@@ -2,8 +2,6 @@ const router = require('express').Router();
 const passport = require('passport');
 const publica = require('../models/publish');
 
-
-
 router.get('/', (req, res, next) => {
   res.render('index');
 });
@@ -22,15 +20,19 @@ router.get('/signin', (req, res, next) => {
   res.render('signin');
 });
 
-
 router.post('/signin', passport.authenticate('local-signin', {
   successRedirect: '/profile',
   failureRedirect: '/signin',
   failureFlash: true
 }));
 
-router.get('/profile',isAuthenticated, (req, res, next) => {
-  res.render('profile');
+router.get('/profile',isAuthenticated, async(req, res, next) => {
+  const posts = await publica.find();
+
+  res.render('profile',{
+    posts
+  });
+  
 });
 
 router.get('/logout', (req, res, next) => {
@@ -51,7 +53,7 @@ router.post('/publicar/:author', async(req, res, next)=>{
   
   const datos = Object.assign({}, req.body, req.params);
   const insert = new publica(datos);
-
+  console.log(datos);
   await insert.save();
   res.redirect('/profile');
 });

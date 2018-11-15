@@ -13,4 +13,4 @@ const postSchema = new schema({
     }
 });
 
-module.exports = mongose.model('sendData', postSchema);
+module.exports = mongose.model('publicaciones', postSchema);
