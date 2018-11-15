@@ -86,7 +86,7 @@ router.post('/publicar/:author', async(req, res, next)=>{
 
   const datos = Object.assign({}, req.body, req.params, imageUrl);
   const insert = new publica(datos);
-  //console.log(datos);
+  console.log(datos);
   await insert.save();
   res.redirect('/profile');
 });
