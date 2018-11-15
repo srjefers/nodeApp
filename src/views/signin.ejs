@@ -1,9 +1,9 @@
 <%- layout('layouts/main') %>
+<div class="form-container">
+  <form action="/signin" method="POST">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Contraseña">
+    <button type="submit">Iniciar Sesion</button>
+  </form>
+</div>
 
-<form action="/signin" method="POST">
-  <input type="email" name="email" placeholder="Email">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">
-    SignIn
-  </button>
-</form>

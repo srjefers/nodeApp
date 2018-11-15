@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Nodejs Passport Local</title>
+  <link rel="stylesheet" href="/styles/style.css" type="text/css">
 </head>
 <body>
   <!-- NAVIGATION -->
+  <h1 class="tittle">LosLobos</h1>  
+  <div class="nav-container">
   <% if (!user) { %>
-  <a href="/signin">Signin</a>
-  <a href="/signup">Signup</a>
-  <% } else { %>
-  <a href="/logout">Logout</a>
-  <a href="/profile">Profle</a>
-  <% } %>
+  
+    <a class="boton signin" href="/signin">Iniciar Sesion</a>
+    <a class="boton signup" href="/signup">Registrate!</a>     
+    <% } else { %>
+      <a class="boton signin" href="/logout">Logout</a>
+      <a class="boton signup" href="/profile">Profle</a>
+      <% } %>
+  </div>
+    
+   
 
+<div class="validaciones">
   <%if (signinMessage) {%>
     <p><%= signinMessage %></p>
   <% } %>
@@ -21,6 +29,8 @@
     <p><%= signupMessage %></p>
   <% } %>
 
+</div>
+  
   <%- body %>
 </body>
 </html>

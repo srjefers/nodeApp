@@ -20,6 +20,7 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 // middlewares
+app.use('/styles', express.static('styles'));
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json());

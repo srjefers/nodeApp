@@ -5,12 +5,14 @@
     <%= posts%>
     <!--
     <%= user.password %>
-    -->
-
-    <form action="/publicar/<%= user._id%>" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="text" name="title">
-        <textarea name="description" id="" cols="30" rows="10"></textarea>
-        <button type="submit">Enviar</button>
-    </form>
+    -->    
+    <div class="form-container">
+        <form action="/publicar/<%= user._id%>" method="post" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Ingrese Titulo">
+            <textarea name="description" id="" cols="30" rows="10" placeholder="Descripcion"></textarea>
+            <input type="file" name="file" placeholder="Subir imagen">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 </section>
+

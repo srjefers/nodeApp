@@ -1,0 +1,85 @@
+:root{
+    --fondo: #2c3338;
+    --letGris: #869e97;
+    --btn1: #12CBC4;
+}
+
+body{
+    background-color: var(--fondo);
+    font-family: roboto;
+    color: var(--letGris);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.tittle{
+    color: white;
+    font-size: 3em;
+}
+
+.nav-container{
+    margin-bottom: 50px;
+}
+.boton{
+    border: 1px solid white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;  
+}
+
+.signin:hover, .signin:active{
+    background: #F79F1F;
+}
+
+.signup:hover, .signup:active{
+    background:  #A3CB38;
+}
+
+.form-container input, .form-container textarea{
+    display:flex;
+    background: #3b4148;
+    width: 300px;
+    margin-bottom: 10px;
+    padding: 15px;
+    color: #989ea0;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.form-container input:hover{
+    background: #434a52;
+}
+
+.form-container button{
+    width: 330px;
+    margin-bottom: 10px;
+    padding: 15px;
+    color: white;
+    font-size: 1em;
+    background: #ea4c88;
+    border:none;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover{
+    background: #e66295;
+}
+
+#app{
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container{
+    
+}
