@@ -57,8 +57,8 @@ function isAuthenticated(req, res, next) {
 
 // --------------------
 AWS.config.update({
-  accessKeyId: 'AKIAISMGDEHRTIG3M6EQ', 
-  secretAccessKey: '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', 
+  accessKeyId: 'AKIAJOTT4QI5TNXPF5TA', 
+  secretAccessKey: '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', 
   region: 'us-west-2'
 })
 const s3= new AWS.S3();
@@ -79,7 +79,12 @@ router.post('/publicar/:author', async(req, res, next)=>{
   }
   
   s3.upload(params, function(err,data){
-    console.log(data.Location);
+    if(err){
+      console.log(err)
+    }else{
+      console.log(data.Location);
+    }
+    
     imageUrl= data.Location;
 
   });
