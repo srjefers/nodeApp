@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const passport = require('passport');
 const publica = require('../models/publish');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+const fs= require('fs');
+const AWS= require('aws-sdk');
+const imgID= require('shortid');
 
 router.get('/', (req, res, next) => {
   res.render('index');
@@ -26,7 +31,7 @@ router.post('/signin', passport.authenticate('local-signin', {
   failureFlash: true
 }));
 
-router.get('/profile',isAuthenticated, async(req, res, next) => {
+router.get('/profile', multipartMiddleware ,isAuthenticated, async(req, res, next) => {
   const posts = await publica.find();
 
   res.render('profile',{
@@ -48,12 +53,40 @@ function isAuthenticated(req, res, next) {
 
   res.redirect('/')
 }
+
+
 // --------------------
+AWS.config.update({
+  accessKeyId: 'AKIAIL33IDO42ZONVUFA', 
+  secretAccessKey: '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', 
+  region: 'us-west-2'
+})
+const s3= new AWS.S3();
+
 router.post('/publicar/:author', async(req, res, next)=>{
+  var tmp_path= req.files.file.path;  
+  let image= fs.createReadStream(tmp_path);
+  let imageName= req.files.file.name;
+  var userID= req.params.author;
+  var serverImg= userID+"/"+imgID.generate()+imageName;
+  var imageUrl;
+
+  var params={
+    Key: serverImg,
+    Body: image,
+    Bucket: 'srjefers',
+    ACL: 'public-read-write'
+  }
   
-  const datos = Object.assign({}, req.body, req.params);
+  s3.upload(params, function(err,data){
+    console.log(data.Location);
+    imageUrl= data.Location;
+
+  });
+
+  const datos = Object.assign({}, req.body, req.params, imageUrl);
   const insert = new publica(datos);
-  console.log(datos);
+  //console.log(datos);
   await insert.save();
   res.redirect('/profile');
 });

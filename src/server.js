@@ -5,6 +5,8 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const multipart = require('connect-multiparty');
 
 // initializations
 const app = express();
@@ -19,16 +21,18 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(multipart());
 app.use(session({
   secret: 'mysecretsession',
-  resave: false,
+  // resave: false
   saveUninitialized: false
 }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
+  
 app.use((req, res, next) => {
   app.locals.signinMessage = req.flash('signinMessage');
   app.locals.signupMessage = req.flash('signupMessage');
