@@ -57,8 +57,8 @@ function isAuthenticated(req, res, next) {
 
 // --------------------
 AWS.config.update({
-  accessKeyId: 'AKIAJOTT4QI5TNXPF5TA', 
-  secretAccessKey: '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', 
+  accessKeyId: 'AKIAIFIJBNNIVMTMY6EQ', 
+  secretAccessKey: '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', 
   region: 'us-west-2'
 })
 const s3= new AWS.S3();
