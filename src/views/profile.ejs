@@ -2,7 +2,13 @@
 <section id="app">
     <!--h1><%= user._id%></h1-->
     <%= user.email %>
-    <%= posts%>
+    <section>
+        <% for(let i=0; i < posts.length; i++ ){%>
+            <h2><%= posts[i].title%></h2>
+            <p><%= posts[i].description%></p>
+            <img src="<%= posts[i].imageUrl%>" alt="imagen">
+        <% } %>
+    </section>
     <!--
     <%= user.password %>
     -->
