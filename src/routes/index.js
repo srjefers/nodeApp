@@ -64,36 +64,41 @@ AWS.config.update({
 const s3= new AWS.S3();
 
 router.post('/publicar/:author', async(req, res, next)=>{
-  var tmp_path= req.files.file.path;  
+  let tmp_path= req.files.file.path;  
   let image= fs.createReadStream(tmp_path);
   let imageName= req.files.file.name;
-  var userID= req.params.author;
-  var serverImg= userID+"/"+imgID.generate()+imageName;
-  var imageUrl;
+  let userID= req.params.author;
+  let serverImg= userID+"/"+imgID.generate()+imageName;
+  let imageUrl;
+  let img;
 
-  var params={
+  let params={
     Key: serverImg,
     Body: image,
     Bucket: 'srjefers',
     ACL: 'public-read-write'
   }
   
-  s3.upload(params, function(err,data){
+  await s3.upload(params, function(err,data){
     if(err){
       console.log(err)
     }else{
       console.log(data.Location);
     }
-    
-    imageUrl= data.Location;
-
+    img = {"imageUrl":data.Location};
   });
 
-  const datos = Object.assign({}, req.body, req.params, imageUrl);
-  const insert = new publica(datos);
-  console.log(datos);
-  await insert.save();
-  res.redirect('/profile');
+  setTimeout(
+    async()=>{
+      console.log('--->',imageUrl);
+      const datos = Object.assign({}, req.body, req.params, img);
+      console.log(datos);
+      const insert = new publica(datos);
+      await insert.save();
+      res.redirect('/profile');
+    }
+    ,3000);
+    
 });
 
 
